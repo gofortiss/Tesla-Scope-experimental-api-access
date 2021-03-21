@@ -29,5 +29,16 @@ function callAPI($method, $url, $data){
    $result = curl_exec($curl);
    if(!$result){die("Connection Failure");}
    curl_close($curl);
-   var_dump($result);
+   return get_array($result);
+}
+
+function get_array($json) {
+   if(is_array($json) || is_object($json)){
+         $result = array();
+         foreach($json as $key => $value){
+            $result[$key] = $this->object_to_array($value);
+         }
+         return $result;
+   }
+   return $json;
 }
